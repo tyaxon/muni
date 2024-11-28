@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Municipio</title>
+</head>
+<body>
+    <h1>Ubicaciones</h1>
+    <a href="{{ url_for('add_location') }}">Agregar nueva ubicación</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Lugar</th>
+                <th>Oficina</th>
+                <th>Encargado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for location in locations %}
+            <tr>
+                <td>{{ location[1] }}</td>
+                <td>{{ location[2] }}</td>
+                <td>{{ location[3] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h1>Dispositivos</h1>
+    <a href="{{ url_for('add_device') }}">Agregar nuevo dispositivo</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Tipo</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Ubicación</th>
+                <th>Especificaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for device in devices %}
+            <tr>
+                <td>{{ device[1] }}</td>
+                <td>{{ device[3] }}</td>
+                <td>{{ device[4] }}</td>
+                <td>{{ device[2] }}</td>
+                <td>
+                    {% if device[1] == 'computer' %}
+                        Procesador: {{ device[7] }}<br>
+                        RAM: {{ device[8] }}<br>
+                        Fuente: {{ device[9] }}<br>
+                        Disco: {{ device[10] }}
+                    {% elif device[1] == 'printer' %}
+                        Conexión: {{ device[11] }}<br>
+                        IP: {{ device[12] }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

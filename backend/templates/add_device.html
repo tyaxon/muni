@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Dispositivo</title>
+</head>
+<body>
+    <h1>Agregar Nuevo Dispositivo</h1>
+    <form method="POST">
+        <label for="type">Tipo de dispositivo:</label>
+        <select id="type" name="type" onchange="showDeviceFields()" required>
+            <option value="computer">Computadora</option>
+            <option value="printer">Impresora</option>
+        </select><br><br>
+
+        <label for="location_id">Ubicación:</label>
+        <select id="location_id" name="location_id" required>
+            {% for location in locations %}
+                <option value="{{ location[0] }}">{{ location[1] }} - {{ location[2] }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="brand">Marca:</label>
+        <input type="text" id="brand" name="brand" required><br><br>
+
+        <label for="model">Modelo:</label>
+        <input type="text" id="model" name="model" required><br><br>
+
+        <label for="status">Estado:</label>
+        <input type="text" id="status" name="status"><br><br>
+
+        <label for="notes">Notas:</label>
+        <textarea id="notes" name="notes"></textarea><br><br>
+
+        <div id="computerFields" style="display:none;">
+            <label for="processor">Procesador:</label>
+            <input type="text" id="processor" name="processor"><br><br>
+
+            <label for="ram">RAM:</label>
+            <input type="text" id="ram" name="ram"><br><br>
+
+            <label for="power_supply">Fuente:</label>
+            <input type="text" id="power_supply" name="power_supply"><br><br>
+
+            <label for="disk">Disco:</label>
+            <input type="text" id="disk" name="disk"><br><br>
+        </div>
+
+        <div id="printerFields" style="display:none;">
+            <label for="connection">Conexión:</label>
+            <select id="connection" name="connection" onchange="showIpField()">
+                <option value="usb">USB</option>
+                <option value="ip">IP</option>
+            </select><br><br>
+
+            <div id="ipField" style="display:none;">
+                <label for="ip_address">IP:</label>
+                <input type="text" id="ip_address" name="ip_address"><br><br>
+            </div>
+        </div>
+
+        <button type="submit">Agregar</button>
+    </form>
+    <br>
+    <a href="{{ url_for('index') }}">Volver a la página principal</a>
+
+    <script>
+        function showDeviceFields() {
+            var type = document.getElementById("type").value;
+            if (type == "computer") {
+                document.getElementById("computerFields").style.display = "block";
+                document.getElementById("printerFields").style.display = "none";
+            } else {
+                document.getElementById("computerFields").style.display = "none";
+                document.getElementById("printerFields").style.display = "block";
+            }
+        }
+
+        function showIpField() {
+            var connection = document.getElementById("connection").value;
+            if (connection == "ip") {
+                document.getElementById("ipField").style.display = "block";
+            } else {
+                document.getElementById("ipField").style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

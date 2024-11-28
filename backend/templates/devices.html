@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dispositivos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Dispositivos</h1>
+
+    <h2>Computadoras</h2>
+    {% if computers %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ubicación</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Estado</th>
+                    <th>Notas</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for computer in computers %}
+                    <tr>
+                        <td>{{ computer['id'] }}</td>
+                        <td>{{ computer['location_name'] }}</td>
+                        <td>{{ computer['brand'] }}</td>
+                        <td>{{ computer['model'] }}</td>
+                        <td>{{ computer['status'] }}</td>
+                        <td>{{ computer['notes'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No hay computadoras registradas.</p>
+    {% endif %}
+
+    <h2>Impresoras</h2>
+    {% if printers %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ubicación</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Estado</th>
+                    <th>Notas</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for printer in printers %}
+                    <tr>
+                        <td>{{ printer['id'] }}</td>
+                        <td>{{ printer['location_name'] }}</td>
+                        <td>{{ printer['brand'] }}</td>
+                        <td>{{ printer['model'] }}</td>
+                        <td>{{ printer['status'] }}</td>
+                        <td>{{ printer['notes'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No hay impresoras registradas.</p>
+    {% endif %}
+
+    <p><a href="{{ url_for('home') }}">Volver al inicio</a></p>
+</body>
+</html>
